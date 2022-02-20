@@ -1,0 +1,7 @@
+{
+  "name": "tesseractApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
