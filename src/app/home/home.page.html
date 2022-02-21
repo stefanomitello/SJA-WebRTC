@@ -1,20 +1,41 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      OCR Tesseract
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+
+
+<ion-content [fullscreen]="true" class="ion-padding" [ngClass]="{'custom-ion-content': isToBack}">
+
+  <ion-row *ngIf="IMAGE_PATH">
+    <ion-col>
+      <img [src]="IMAGE_PATH">
+    </ion-col>
+  </ion-row>
+
+  <ion-img [src]="image"></ion-img>
+
+
+  <!-- <ion-button expand="full" (click)="captureImage()">Carica immagine</ion-button> -->
+  <!-- <ion-button color="primary" (click)="takePicture02()">Apri fotocamera</ion-button> -->
+  <ion-button expand="full" (click)="recognizeImage()" [disabled]="!workerReady">Scannerizza</ion-button>
+
+  <ion-card *ngIf="workerReady && captureProgress">
+    <ion-card-header>
+      <ion-card-title>
+        Sto scannerizzando: {{ captureProgress }}%
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ ocrResult }}
+
+      <a routerLink="/webrtc">Chiama l'utente {{ ocrResult }}</a>
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+<ion-button color="primary" (click)="takePicture02()">Apri fotocamera</ion-button>

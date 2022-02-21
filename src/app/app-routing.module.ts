@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'webrtc',
+    loadChildren: () => import('./webrtc/webrtc.module').then( m => m.WebrtcPageModule)
+  },
 ];
 
 @NgModule({

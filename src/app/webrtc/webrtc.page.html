@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>webrtc</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="errorMsg"></div>
+
+  <div style="position: relative;">
+
+    <video id="partner-video" (click)="swapVideo('my-video')" autoplay playsinline
+      [ngClass]="{'top-video': topVideoFrame === 'partner-video', 'main-video': topVideoFrame != 'partner-video'}">
+    </video>
+    <video id="my-video" (click)="swapVideo('partner-video')" autoplay playsinline
+      [ngClass]="{'top-video': topVideoFrame === 'my-video', 'main-video': topVideoFrame != 'my-video'}">
+    </video>
+  </div>
+
+
+  <ion-row>
+    <ion-col>
+      <ion-label>Accedi come: </ion-label>
+      <!-- <ion-button (click)="login()">Accedi come: </ion-button> -->
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="userId" placeholder="Username"></ion-input>
+
+      </ion-item>
+      <br>
+      <ion-button expand="full" (click)="login()">Accedi</ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="userId">
+    <ion-col>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="partnerId" placeholder="Partner's user"></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" (click)="call()">Chiama</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
