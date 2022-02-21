@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ENGINE_METHOD_STORE } from 'constants';
 import { WebrtcService } from '../services/webrtc.service';
 
@@ -11,15 +12,22 @@ import { WebrtcService } from '../services/webrtc.service';
 export class WebrtcPage implements OnInit {
 
   topVideoFrame = 'partner-video';
-  userId: string;
-  partnerId: string;
+  userId: string = "";
+  partnerId: string = "";
   myEl: HTMLMediaElement;
   partnerEl: HTMLMediaElement;
 
 
-  constructor(public webRTC: WebrtcService, public elRef: ElementRef) { }
+
+
+  constructor(public webRTC: WebrtcService, public elRef: ElementRef, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    this.partnerId = this.activatedRoute.snapshot.paramMap.get('user');
+
+    console.log(this.userId)
+
     this.myEl = this.elRef.nativeElement.querySelector('#my-video');
     this.partnerEl = this.elRef.nativeElement.querySelector('#partner-video');
 
